@@ -58,13 +58,31 @@ u1_t os_getRegion (void) { return REGCODE_EU868; }
 // cycle limitations).
 const unsigned TX_INTERVAL = 60000;
 
-// Pin mapping
+
+#if defined(ARDUINO_AVR_MINI) // Nexus
 const lmic_pinmap lmic_pins = {
-    .nss = 6,
+    .nss = 10,
     .rxtx = LMIC_UNUSED_PIN,
-    .rst = 5,
-    .dio = {2, 3, 4},
+    .rst = LMIC_UNUSED_PIN, // hardwired to AtMega RESET
+    .dio = {4, 5, 7},
 };
+#elif defined(ARDUINO_MJS_V1)
+const lmic_pinmap lmic_pins = {
+  .nss = 10,
+  .rxtx = LMIC_UNUSED_PIN,
+  .rst = 9,
+  .dio = {2, 3, 4},
+};
+#elif defined(ARDUINO_PINOCCIO)
+const lmic_pinmap lmic_pins = {
+  .nss = SS,
+  .rxtx = LMIC_UNUSED_PIN,
+  .rst = LMIC_UNUSED_PIN,
+  .dio = {4, 5, 7},
+};
+#else
+#error "Add pinmap"
+#endif
 
 extern "C" void onLmicEvent (ev_t ev);
 void onLmicEvent (ev_t ev) {
@@ -158,6 +176,13 @@ void onLmicEvent (ev_t ev) {
 void setup() {
     Serial.begin(115200);
     Serial.println(F("Starting"));
+    Serial.flush();
+    #ifdef VCC_ENABLE
+    // For Pinoccio Scout boards
+    pinMode(VCC_ENABLE, OUTPUT);
+    digitalWrite(VCC_ENABLE, HIGH);
+    delay(1000);
+    #endif
 
     // LMIC init
     os_init(nullptr);
