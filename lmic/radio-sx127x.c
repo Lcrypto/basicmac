@@ -929,7 +929,9 @@ void radio_reset (void) {
     hal_pin_tcxo(0);
 
     // check opmode
-    ASSERT( readReg(RegOpMode) == OPMODE_FSK_STANDBY );
+    // TODO: When the reset pin is not connected, the transceiver might
+    // not be in standby mode now
+    //ASSERT( readReg(RegOpMode) == OPMODE_FSK_STANDBY );
 }
 
 void radio_init (void) {
