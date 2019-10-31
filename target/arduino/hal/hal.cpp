@@ -81,6 +81,7 @@ bool hal_pin_tcxo (u1_t val) {
 }
 
 void hal_pin_busy_wait (void) {
+    delay(10);
     // Not implemented
 }
 
