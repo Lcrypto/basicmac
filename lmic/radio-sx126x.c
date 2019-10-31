@@ -529,6 +529,7 @@ void radio_sleep (void) {
 static void txlora (void) {
     SetRegulatorMode(REGMODE_DCDC);
     SetDIO2AsRfSwitchCtrl(1);
+    SetDIO3AsTcxoCtrl(1);
     SetStandby(STDBY_RC);
     SetPacketType(PACKET_TYPE_LORA);
     SetRfFrequency(LMIC.freq);
@@ -554,6 +555,7 @@ static void txlora (void) {
 static void txfsk (void) {
     SetRegulatorMode(REGMODE_DCDC);
     SetDIO2AsRfSwitchCtrl(1);
+    SetDIO3AsTcxoCtrl(1);
     SetStandby(STDBY_RC);
     SetPacketType(PACKET_TYPE_FSK);
     SetRfFrequency(LMIC.freq);
@@ -581,6 +583,7 @@ static void txfsk (void) {
 static void txcw (void) {
     SetRegulatorMode(REGMODE_DCDC);
     SetDIO2AsRfSwitchCtrl(1);
+    SetDIO3AsTcxoCtrl(1);
     SetStandby(STDBY_RC);
     SetRfFrequency(LMIC.freq);
     SetTxPower(LMIC.txpow + LMIC.txPowAdj + TX_ERP_ADJ); // bandpow + MACadj/APIadj + ERPadj
@@ -613,6 +616,7 @@ static void rxfsk (bool rxcontinuous) {
     ostime_t t0 = os_getTime();
     SetRegulatorMode(REGMODE_DCDC);
     SetDIO2AsRfSwitchCtrl(1);
+    SetDIO3AsTcxoCtrl(1);
     SetStandby(STDBY_RC);
     SetPacketType(PACKET_TYPE_FSK);
     SetRfFrequency(LMIC.freq);
@@ -662,6 +666,7 @@ static void rxlora (bool rxcontinuous) {
     ostime_t t0 = os_getTime();
     SetRegulatorMode(REGMODE_DCDC);
     SetDIO2AsRfSwitchCtrl(1);
+    SetDIO3AsTcxoCtrl(1);
     SetStandby(STDBY_RC);
     SetPacketType(PACKET_TYPE_LORA);
     SetRfFrequency(LMIC.freq);
