@@ -303,7 +303,7 @@ void hal_init (void *bootarg) {
 
 void hal_failed () {
     Serial.flush();
-    hal_disableIRQs();
+    //hal_disableIRQs();
     while(1);
 }
 
