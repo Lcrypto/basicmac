@@ -21,7 +21,7 @@ static void hal_io_init () {
     // NSS and DIO0 are required, DIO1 is required for LoRa, DIO2 for FSK
     ASSERT(lmic_pins.nss != LMIC_UNUSED_PIN);
     ASSERT(lmic_pins.dio[0] != LMIC_UNUSED_PIN);
-    ASSERT(lmic_pins.dio[1] != LMIC_UNUSED_PIN || lmic_pins.dio[2] != LMIC_UNUSED_PIN);
+    //ASSERT(lmic_pins.dio[1] != LMIC_UNUSED_PIN || lmic_pins.dio[2] != LMIC_UNUSED_PIN);
 
     pinMode(lmic_pins.nss, OUTPUT);
     if (lmic_pins.rxtx != LMIC_UNUSED_PIN)
